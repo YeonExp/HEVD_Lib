@@ -28,7 +28,7 @@ public:
 	~BaseIoctlImpl();
 	HANDLE OpenDevice();
 	void CloseDevice() const;
-	BOOL sendData(std::string& payload, DWORD code);
+	BOOL sendData(const char* payload, std::size_t size, DWORD code);
 private:
 	std::string device;
 	HANDLE openDevice;

@@ -16,7 +16,7 @@ void BaseIoctl::CloseDevice() const
 {
 	newIoctl->CloseDevice();
 }
-BOOL BaseIoctl::sendData(std::string& payload, DWORD code)
+BOOL BaseIoctl::sendData(const char* payload, std::size_t size, DWORD code)
 {
-	return newIoctl->sendData(payload, code);
+	return newIoctl->sendData(payload, size, code);
 }

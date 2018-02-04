@@ -23,16 +23,16 @@ void BaseIoctlImpl::CloseDevice() const
 	CloseHandle(openDevice);
 }
 
-BOOL BaseIoctlImpl::sendData(std::string& payload, DWORD code)
+BOOL BaseIoctlImpl::sendData(const char* payload, std::size_t size, DWORD code)
 {
 	BYTE* inBuffer = (BYTE*)HeapAlloc(
-		GetProcessHeap(), HEAP_ZERO_MEMORY, payload.size());
-	memcpy(inBuffer, payload.c_str(), payload.size());
+		GetProcessHeap(), HEAP_ZERO_MEMORY, size);
+	memcpy(inBuffer, payload, size);
 	DWORD ret = 0;
 	BOOL _ret = DeviceIoControl(openDevice,
 		code,
 		inBuffer,
-		payload.size(),
+		size,
 		NULL,
 		0,
 		&ret,
